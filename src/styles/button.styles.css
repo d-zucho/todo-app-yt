@@ -25,5 +25,13 @@
 .btn_secondary {
   background-color: var(--white);
   color: var(--primaryPurple);
+  padding-left: 1rem;
   font-weight: 500;
+  border: none;
+}
+
+.btn_secondary:active {
+  color: var(--primaryPurple);
+  background-color: var(--white);
+  outline: none;
 }

@@ -1,4 +1,6 @@
-import Button from './Button'
+import Button, { SelectButton } from './Button'
+
+import '../styles/header.styles.css'
 
 function Header() {
   return (
@@ -6,6 +8,11 @@ function Header() {
       <Button varient='primary' type='button'>
         Click Me
       </Button>
+      <SelectButton>
+        <option value='all'>All</option>
+        <option value='incomplete'>Incomplete</option>
+        <option value='complete'>Complete</option>
+      </SelectButton>
     </header>
   )
 }
