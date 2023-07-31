@@ -14,7 +14,11 @@ function Button({ type, varient, children }) {
 }
 
 export function SelectButton({ children, id, ...rest }) {
-  return <select className='btn btn_select'>{children}</select>
+  return (
+    <select id={id} className='btn btn_select'>
+      {children}
+    </select>
+  )
 }
 
 export default Button

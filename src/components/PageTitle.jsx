@@ -1,4 +1,4 @@
-import '../styles/PageTitle.css'
+import '../styles/pageTitle.css'
 
 function PageTitle({ children, ...rest }) {
   return (
