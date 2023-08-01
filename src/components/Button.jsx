@@ -1,5 +1,5 @@
 import '../styles/button.styles.css'
-function Button({ type, varient, children }) {
+function Button({ type, varient, children, ...rest }) {
   return (
     <button
       className={`btn ${
@@ -7,6 +7,7 @@ function Button({ type, varient, children }) {
       }`}
       type={type}
       varient={varient}
+      {...rest}
     >
       {children}
     </button>

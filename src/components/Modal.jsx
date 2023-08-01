@@ -2,16 +2,16 @@ import '../styles/modal.styles.css'
 import Button from './Button'
 import { MdOutlineClose } from 'react-icons/md'
 
-function Modal({ open, setOpenModal }) {
+function Modal({ open, handleModal }) {
   return (
     <>
-      {open && (
+      {open ? (
         <div className='modal-wrapper'>
           <div className='modal-container'>
             <div
-              onClick={() => setOpenModal(false)}
+              onClick={() => handleModal(false)}
               className='closeIcon-container'
-              onKeyDown={() => setOpenModal(false)}
+              onKeyDown={() => handleModal(false)}
               tabIndex={0}
               role='button'
             >
@@ -39,11 +39,15 @@ function Modal({ open, setOpenModal }) {
                 </select>
               </div>
               <div className='buttonContainer'>
-                <Button type='submit' varient='primary'>
+                <Button
+                  type='submit'
+                  varient='primary'
+                  onClick={() => handleModal(false)}
+                >
                   Add task
                 </Button>
                 <Button
-                  onClick={() => setOpenModal(false)}
+                  onClick={() => handleModal(false)}
                   type='button'
                   varient='secondary'
                   role='button'
@@ -54,6 +58,8 @@ function Modal({ open, setOpenModal }) {
             </form>
           </div>
         </div>
+      ) : (
+        ''
       )}
     </>
   )
