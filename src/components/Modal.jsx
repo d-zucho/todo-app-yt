@@ -1,8 +1,21 @@
 import '../styles/modal.styles.css'
 import Button from './Button'
+import { useState } from 'react'
 import { MdOutlineClose } from 'react-icons/md'
 
 function Modal({ open, handleModal }) {
+  const [todo, setTodo] = useState({
+    complete: false,
+    todoDescription: 'Hello world',
+  })
+
+  const handleSubmit = () => {
+    e.preventDefault()
+    console.log('form submitted')
+
+    console.log(document.getElementById('modal-form').elements)
+  }
+
   return (
     <>
       {open ? (
@@ -17,13 +30,7 @@ function Modal({ open, handleModal }) {
             >
               <MdOutlineClose className='close-icon' />
             </div>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault()
-                console.log('form submitted')
-              }}
-              className='modal-form'
-            >
+            <form onSubmit={handleSubmit} className='modal-form'>
               <h1 className='formTitle'>Add Task</h1>
               <div className='form-group'>
                 <label className='form-label' htmlFor='title'>
