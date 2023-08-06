@@ -14,7 +14,9 @@ function Todo() {
         <div className='content'>
           <input type='checkbox' name='checkmark' id='checkmark' />
           <span className='todoText'>{todo.todoDescription}</span>
-          <FaTimes className='delete-icon' />
+          <div className='deleteIicon-container'>
+            <FaTimes className='delete-icon' />
+          </div>
         </div>
       </div>
     </div>

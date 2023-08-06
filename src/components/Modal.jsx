@@ -1,19 +1,47 @@
+import { set } from 'date-fns'
 import '../styles/modal.styles.css'
 import Button from './Button'
 import { useState } from 'react'
 import { MdOutlineClose } from 'react-icons/md'
+import { addTodo } from '../slices/todoSlice'
+import { useDispatch } from 'react-redux'
+import { v4 as uuidv4 } from 'uuid'
+import { toast } from 'react-hot-toast'
 
 function Modal({ open, handleModal }) {
-  const [todo, setTodo] = useState({
-    complete: false,
-    todoDescription: 'Hello world',
-  })
+  //* states
+  const [title, setTitle] = useState('')
+  const [status, setStatus] = useState('incomplete')
 
-  const handleSubmit = () => {
+  //* redux dispatch
+  const dispatch = useDispatch()
+
+  //* submit form handler
+  const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('form submitted')
 
-    console.log(document.getElementById('modal-form').elements)
+    // console.log('form submitted')
+    // console.log(title, status)
+
+    // make sure both fields are filled; if true, dispatch the action
+    if (title && status) {
+      dispatch(
+        addTodo({
+          id: uuidv4(),
+          title,
+          status,
+          time: new Date().toLocaleString(),
+        })
+      )
+    }
+
+    //* reset the form
+    setTitle('')
+    setStatus('incomplete')
+    handleModal(false)
+
+    //* close modal
+    toast.success('Task added successfully')
   }
 
   return (
@@ -36,11 +64,23 @@ function Modal({ open, handleModal }) {
                 <label className='form-label' htmlFor='title'>
                   Title:{' '}
                 </label>
-                <input type='text' name='title' id='title' />
+                <input
+                  type='text'
+                  name='title'
+                  id='title'
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
                 <label className='form-label' htmlFor='status'>
                   Status:{' '}
                 </label>
-                <select name='status' id='status'>
+                <select
+                  name='status'
+                  id='status'
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                  onSubmit={setStatus}
+                >
                   <option value='incomplete'>Incomplete</option>
                   <option value='complete'>Complete</option>
                 </select>
@@ -49,7 +89,8 @@ function Modal({ open, handleModal }) {
                 <Button
                   type='submit'
                   varient='primary'
-                  onClick={() => handleModal(false)}
+                  role='button'
+                  // onClick={() => handleModal(false)}
                 >
                   Add task
                 </Button>
