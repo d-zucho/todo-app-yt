@@ -3,9 +3,11 @@ import { createSlice } from '@reduxjs/toolkit'
 const getInitialTodos = () => {
   const localTodoList = localStorage.getItem('todoList')
 
+  // if localTodoList exists, parse it and return it
   if (localTodoList) {
     return JSON.parse(localTodoList)
   }
+  // else, return an empty array
   localStorage.setItem('todoList', JSON.stringify([]))
   return []
 }

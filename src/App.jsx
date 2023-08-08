@@ -6,7 +6,7 @@ import TodoList from './components/TodoList'
 
 // global styles
 import './styles/GlobalStyles.css'
-import Todo from './components/Todo'
+
 import { Toaster } from 'react-hot-toast'
 
 function App() {
@@ -16,7 +16,6 @@ function App() {
       <div className='container'>
         <Header />
         <TodoList />
-        <Todo />
       </div>
       <Toaster />
     </>
