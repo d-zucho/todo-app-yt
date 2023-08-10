@@ -17,7 +17,14 @@ function App() {
         <Header />
         <TodoList />
       </div>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          // position: 'top-right',
+          style: {
+            fontSize: '1.5rem',
+          },
+        }}
+      />
     </>
   )
 }

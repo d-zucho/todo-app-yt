@@ -33,15 +33,15 @@ function Modal({ open, handleModal }) {
           time: new Date().toLocaleString(),
         })
       )
+      //* reset the form
+      setTitle('')
+      setStatus('incomplete')
+      handleModal(false)
+      //* close modal
+      toast.success('Task added successfully')
+    } else {
+      toast.error('Please fill in all fields')
     }
-
-    //* reset the form
-    setTitle('')
-    setStatus('incomplete')
-    handleModal(false)
-
-    //* close modal
-    toast.success('Task added successfully')
   }
 
   return (

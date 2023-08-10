@@ -14,6 +14,7 @@ const getInitialTodos = () => {
 
 const initialValue = {
   todoList: getInitialTodos(),
+  // this is the initial value of the state using the getInitialTodos function above
 }
 
 export const todoSlice = createSlice({
