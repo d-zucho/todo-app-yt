@@ -12,7 +12,7 @@ function Header() {
   }
 
   return (
-    <header>
+    <header className='header-container'>
       <Button
         varient='primary'
         type='button'

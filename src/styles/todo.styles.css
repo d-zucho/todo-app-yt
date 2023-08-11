@@ -1,45 +1,79 @@
-.item {
+.todo-container {
+  position: relative;
   display: flex;
+  flex-direction: column;
+  align-items: space-evenly;
   width: 85%;
   margin: 2rem auto;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   background: #fff;
   box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
     0 10px 20px hsl(0deg 0% 0% / 0.075);
 }
 
 .content {
+  position: relative;
+  padding: 2rem 0;
+  width: 100%;
   display: flex;
   align-items: center;
 }
 
+/* .content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+} */
+
 .todoText {
   display: block;
   font-size: 16px;
-  margin-left: 5rem;
+  margin-left: 2rem;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .checkbox {
   margin-right: 20px;
 }
 
-.deleteIicon-container {
+.icons {
+  width: 5rem;
+  gap: 1rem;
   margin-left: auto;
   display: flex;
   align-items: center;
   cursor: pointer;
   border-radius: 8px;
-  transition: 450ms ease-in-out;
-  &:hover {
-    transform: scale(1.25);
-  }
 
   & svg {
-    color: red;
+    /* color: red; */
     font-size: 2rem;
+    transition: 350ms ease-in-out;
+
+    &:hover {
+      transform: scale(1.25);
+      color: #646ff0;
+    }
   }
+}
+.item {
+  position: relative;
+  max-width: 100%;
+}
+
+.todo-time {
+  font-size: 12px;
+  color: #ccc;
+  position: absolute;
+  bottom: 0;
+  right: 1rem;
 }

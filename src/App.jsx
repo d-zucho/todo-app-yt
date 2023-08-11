@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <PageTitle>Todo List</PageTitle>
-      <div className='container'>
+      <div className='main-container'>
         <Header />
         <TodoList />
       </div>
