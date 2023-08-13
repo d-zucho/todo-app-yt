@@ -1,17 +1,20 @@
 // import { useState } from 'react'
 import { format } from 'date-fns'
 import { MdDelete, MdEdit } from 'react-icons/md'
+import { useDispatch } from 'react-redux'
+import { deleteTodo } from '../slices/todoSlice.js'
+import { Toaster, toast } from 'react-hot-toast'
+// import actions set up in the todoSlice.js file
 import '../styles/todo.styles.css'
+import { useState } from 'react'
 
 function Todo({ todo, statusHandler }) {
-  const handleDelete = (id) => {
-    console.log('delete')
-    console.log(todo.id, id)
-  }
+  const dispatch = useDispatch()
+  const [updateModalOpen, setUpdateModalOpen] = useState(false)
 
-  const handleEdit = (id) => {
-    console.log('edit')
-    console.log(todo.id, id)
+  const handleDelete = (id) => {
+    dispatch(deleteTodo(todo.id))
+    toast.success('Todo deleted successfully')
   }
 
   return (

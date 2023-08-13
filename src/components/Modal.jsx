@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import { toast } from 'react-hot-toast'
 
-function Modal({ open, handleModal }) {
+function Modal({ type, open, handleModal }) {
   //* states
   const [title, setTitle] = useState('')
   const [status, setStatus] = useState('incomplete')
@@ -25,22 +25,25 @@ function Modal({ open, handleModal }) {
 
     // make sure both fields are filled; if true, dispatch the action
     if (title && status) {
-      dispatch(
-        addTodo({
-          id: uuidv4(),
-          title,
-          status,
-          time: new Date().toLocaleString(),
-        })
-      )
-      //* reset the form
-      setTitle('')
-      setStatus('incomplete')
-      handleModal(false)
-      //* close modal
-      toast.success('Task added successfully')
-    } else {
-      toast.error('Please fill in all fields')
+      if (type === 'add') {
+        dispatch(
+          addTodo({
+            id: uuidv4(),
+            title,
+            status,
+            time: new Date().toLocaleString(),
+          })
+        )
+        //* reset the form
+        setTitle('')
+        setStatus('incomplete')
+        handleModal(false)
+        //* close modal
+        toast.success('Task added successfully')
+      }
+    }
+    if (type === 'update') {
+      console.log('Updating Task!')
     }
   }
 
@@ -59,7 +62,9 @@ function Modal({ open, handleModal }) {
               <MdOutlineClose className='close-icon' />
             </div>
             <form onSubmit={handleSubmit} className='modal-form'>
-              <h1 className='formTitle'>Add Task</h1>
+              <h1 className='formTitle'>
+                {type === 'add' ? 'Add a new task' : 'Edit task'}
+              </h1>
               <div className='form-group'>
                 <label className='form-label' htmlFor='title'>
                   Title:{' '}
@@ -92,7 +97,7 @@ function Modal({ open, handleModal }) {
                   role='button'
                   // onClick={() => handleModal(false)}
                 >
-                  Add task
+                  {type === 'add' ? 'Add' : 'Update'} task
                 </Button>
                 <Button
                   onClick={() => handleModal(false)}
