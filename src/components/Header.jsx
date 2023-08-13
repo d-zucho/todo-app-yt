@@ -29,7 +29,7 @@ function Header() {
         <option value='complete'>Complete</option>
       </SelectButton>
 
-      <Modal open={openModal} handleModal={setOpenModal} />
+      <Modal type='add' open={openModal} handleModal={setOpenModal} />
     </header>
   )
 }

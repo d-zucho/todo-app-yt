@@ -52,8 +52,23 @@ export const todoSlice = createSlice({
         state.todoList = parsedTodoList // update the state
       }
     },
+    updateTodo: (state, action) => {
+      const todoList = localStorage.getItem('todoList')
+      if (todoList) {
+        const parsedTodoList = JSON.parse(todoList)
+        // loop through the todo list and find the todo with the same id as the payload and update it
+        parsedTodoList.forEach((todo, index) => {
+          if (todo.id === action.payload.id) {
+            todo.title = action.payload.title
+            todo.status = action.payload.status
+          }
+        })
+        localStorage.setItem('todoList', JSON.stringify(parsedTodoList))
+        state.todoList = parsedTodoList
+      }
+    },
   },
 })
 
-export const { addTodo, deleteTodo } = todoSlice.actions
+export const { addTodo, deleteTodo, updateTodo } = todoSlice.actions
 export default todoSlice.reducer

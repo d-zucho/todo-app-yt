@@ -1,20 +1,30 @@
 import { set } from 'date-fns'
 import '../styles/modal.styles.css'
 import Button from './Button'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MdOutlineClose } from 'react-icons/md'
-import { addTodo } from '../slices/todoSlice'
+import { addTodo, updateTodo } from '../slices/todoSlice'
 import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import { toast } from 'react-hot-toast'
 
-function Modal({ type, open, handleModal }) {
+function Modal({ type, open, handleModal, todo }) {
   //* states
   const [title, setTitle] = useState('')
   const [status, setStatus] = useState('incomplete')
 
   //* redux dispatch
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (type === 'update' && todo) {
+      setTitle(todo.title)
+      setStatus(todo.status)
+    } else {
+      setTitle('')
+      setStatus('incomplete')
+    }
+  }, [type, todo, open])
 
   //* submit form handler
   const handleSubmit = (e) => {
@@ -23,7 +33,7 @@ function Modal({ type, open, handleModal }) {
     // console.log('form submitted')
     // console.log(title, status)
 
-    // make sure both fields are filled; if true, dispatch the action
+    // make sure both fields are filled; if true, and if tyoe = 'add' dispatch the action
     if (title && status) {
       if (type === 'add') {
         dispatch(
@@ -41,9 +51,29 @@ function Modal({ type, open, handleModal }) {
         //* close modal
         toast.success('Task added successfully')
       }
+    } else {
+      toast.error('Please fill all fields')
     }
     if (type === 'update') {
-      console.log('Updating Task!')
+      console.log('Updating Task Start!')
+
+      if (todo.title !== title || todo.status !== status) {
+        dispatch(
+          updateTodo({
+            ...todo,
+            title,
+            status,
+          })
+        )
+        //* reset the form
+        // setTitle('')
+        // setStatus('incomplete')
+        handleModal(false)
+        //* close modal
+        toast.success('Task updated successfully')
+      } else {
+        toast.error('No changes made')
+      }
     }
   }
 
